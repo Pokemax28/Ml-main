@@ -26,8 +26,8 @@ urlpatterns = [
    path('RegisterPage/', views.RegisterPage, name='RegisterPage'),
    path('produit_supprimer/<int:produit_id>/', views.produit_supprimer, name='produit_supprimer'),
   path('produit_modifier/<int:produit_id>/', views.produit_modifier, name='produit_modifier'),
-  path('produit/', include('produit.urls', namespace='produit')),
   path('produit_add_admin/', views.add_produit, name='produit_add_admin'),
+  path('produit/', include('produit.urls')),
 
 
 ]

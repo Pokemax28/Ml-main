@@ -17,9 +17,13 @@ Including another URLconf
 from . import views
 from django.urls import path
 
+app_name = 'produit'
+
+
 urlpatterns = [
    path('',views.index,name='pr_index'),
-   path('predict', views.prediction_view, name='predict_price'),
+   path('predict/', views.prediction_view, name='predict_price'),
+   
     
 
 ]

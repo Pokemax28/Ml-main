@@ -76,10 +76,11 @@ def add_produit(request):
         prix = request.POST.get('prix')
         produit = Produit(surface=surface, prix=prix)
         produit.save()
-        return redirect('accueil:HomePageAdmin')  # Redirige vers la page d'accueil admin après l'ajout
-    return render(request, 'accueil/HomePageAdmin.html')  # Affiche le formulaire d'ajout de produit
+        return redirect('HomePageAdmin')  # Corrigé ici
+    return render('HomePageAdmin.html')
+
 
 def produit_supprimer(request, produit_id):
     produit = get_object_or_404(Produit, id=produit_id)
     produit.delete()
-    return redirect('/accueil/HomePageAdmin.html')
+    return redirect('HomePageAdmin.html')
