@@ -1,0 +1,95 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1 class="text-center">Bienvenue sur la page d'accueil</h1>
+    
+    <p class="text-center">Bonjour, {{ auth_user.username }}!</p>
+
+    <div class="container mt-4">
+        <h2 class="text-center">Liste des produits</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Numéro du bien</th>
+                    <th>Surface</th>
+                    <th>Prix</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for produit_produit in produit_produits %}
+                <tr>
+                    <td>{{ produit_produit.id }}</td>
+                    <td>{{ produit_produit.surface }}</td>
+                    <td>{{ produit_produit.prix }}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modifierModal" data-id="{{ produit_produit.id }}" data-surface="{{ produit_produit.surface }}" data-prix="{{ produit_produit.prix }}">Modifier</button>
+                        <a href="{% url 'produit_supprimer' produit_produit.id %}" class="btn btn-danger btn-sm">Supprimer</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal pour modifier un produit -->
+    <div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modifierModalLabel">Modifier le produit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post" id="formModifierProduit" action="{% url 'produit_modifier' produit.id %}">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <input type="hidden" id="produit_id" name="id">
+                        <div class="mb-3">
+                            <label for="surface" class="form-label">Surface</label>
+                            <input type="number" class="form-control" id="surface" name="surface" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="prix" class="form-label">Prix</label>
+                            <input type="number" class="form-control" id="prix" name="prix" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <ul>
+        <li><a href="{% url 'pr_index' %}">Voir les produits</a></li>
+    </ul>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Script pour remplir le formulaire de modification dans la modal
+        var modifierModal = document.getElementById('modifierModal');
+        modifierModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var produitId = button.getAttribute('data-id');
+            var produitSurface = button.getAttribute('data-surface');
+            var produitPrix = button.getAttribute('data-prix');
+
+            var modalBody = modifierModal.querySelector('.modal-body');
+            modalBody.querySelector('#produit_id').value = produitId;
+            modalBody.querySelector('#surface').value = produitSurface;
+            modalBody.querySelector('#prix').value = produitPrix;
+        });
+    </script>
+</body>
+</html>

@@ -13,25 +13,25 @@
  <body>
     <h1 class="text-center">Bienvenue sur la page d'accueil</h1>
     
-    {% if user.is_authenticated %}
-        <p class="text-center">Bonjour, {{ user.username }}!</p>
-    {% else %}
+    {% if auth_user.is_authenticated %}
+        <p class="text-center">Bonjour, {{ auth_user.username }}!</p>
+    {% endif %}
 
     <div class="container mt-4">
         <h2 class="text-center">Liste des produits</h2>
         <table class="table table-bordered">
         <thead>
             <tr>
-            <th>Nom</th>
-            <th>Description</th>
+            <th>Numéro du bien</th>
+            <th>surface</th>
             <th>Prix</th>
             </tr>
         </thead>
         <tbody>
-            {% for produit in produits %}
+            {% for produit in produit_produit.objects.all %}
             <tr>
-                <td>{{ produit.nom }}</td>
-                <td>{{ produit.description }}</td>
+                <td>{{ produit.id }}</td>
+                <td>{{ produit.surface }}</td>
                 <td>{{ produit.prix }}</td>
             </tr>
             {% endfor %}
