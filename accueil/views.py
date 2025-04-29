@@ -9,5 +9,5 @@ def index(request):
     return render(request, 'accueil/index.html')
 
 
-def login(request):
-    return render(request, 'accueil/login.html')
+def HomePage(request):
+    return render(request, 'accueil/HomePage.html')
