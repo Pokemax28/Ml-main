@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prédire le prix</title>
+</head>
+<body>
+    <h1>Prédiction du prix</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label>Surface (m²) :</label>
+        <input type="number" name="surface" required>
+        <button type="submit">Prédire</button>
+    </form>
+
+    {% if result %}
+        <p>Prix estimé : {{ result }} €</p>
+    {% endif %}
+</body>
+</html>
