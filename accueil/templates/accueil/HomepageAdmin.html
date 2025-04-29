@@ -129,18 +129,26 @@
                     <th>Nom d'utilisateur</th>
                     <th>Email</th>
                     <th>Date de création</th>
+                    <th>Staff</th>
                 </tr>
             </thead>
             <tbody>
                 {% for user in users %}
                 <tr>
-                    <td>{{ auth_user.username }}</td>
                     <td>{{ user.username }}</td>
-                    
-                    <td>{{ auth_user.email }}</td>
-                    <td>{{ auth_user.date_joined }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.date_joined }}</td>
+                    <td>
+                        {% if user.is_staff %}
+                            Admin
+                        {% else %}
+                            Utilisateur
+                        {% endif %}
+                    </td>
                 </tr>
                 {% endfor %}
+                
+            
             </tbody>
         </table>
     </div>

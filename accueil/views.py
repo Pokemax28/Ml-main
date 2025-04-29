@@ -30,18 +30,17 @@ def index(request):
 
 def HomePageAdmin(request):
     produits = Produit.objects.all()
+    users = User.objects.all()
     return render(request, 'accueil/HomePageAdmin.html', {
         'produit_produits': produits,
+        'users': users,
         'auth_user': request.user
     })
 
 def HomePageUser(request):
-   produits = Produit.objects.all()
-   return render(request, 'accueil/HomePageUser.html', {
-        'produit_produits': produits,
-        'auth_user': request.user  # pour {{ auth_user.username }}
+    return render(request, 'accueil/HomePageUser.html', {
+        'auth_user': request.user  # On passe juste l'utilisateur authentifié
     })
-
 
 def RegisterPage(request):
     if request.method == 'POST':
@@ -52,7 +51,7 @@ def RegisterPage(request):
         user = User.objects.create_user(username=username, password=password, email=email)
         user.save()
 
-        return redirect('index')
+        return redirect('HomePageUser')  # Redirige vers la page d'accueil utilisateur après l'inscription
 
     return render(request, 'accueil/RegisterPage.html')
 

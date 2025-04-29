@@ -22,8 +22,8 @@ from django.conf import settings
 urlpatterns = [
    path('', views.index, name='Login'),
    path('HomePageAdmin/', views.HomePageAdmin, name='HomePageAdmin'),
-   path('HomePageUser/', views.HomePageUser, name='HomePageUser'),
-   path('RegisterPage/', views.RegisterPage, name='RegisterPage'),
+       path('RegisterPage/', views.RegisterPage, name='RegisterPage'),
+    path('HomePageUser/', views.HomePageUser, name='HomePageUser'),
    path('produit_supprimer/<int:produit_id>/', views.produit_supprimer, name='produit_supprimer'),
   path('produit_modifier/<int:produit_id>/', views.produit_modifier, name='produit_modifier'),
   path('produit_add_admin/', views.add_produit, name='produit_add_admin'),
