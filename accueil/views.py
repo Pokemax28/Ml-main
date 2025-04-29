@@ -56,21 +56,30 @@ def RegisterPage(request):
 
     return render(request, 'accueil/RegisterPage.html')
 
+
 def produit_modifier(request, produit_id):
     produit = get_object_or_404(Produit, id=produit_id)
-    
+
     if request.method == 'POST':
-        # Récupérer les nouvelles données
-        produit.surface = request.POST['surface']
-        produit.prix = request.POST['prix']
+        produit.description = request.POST.get('surface')  # ou 'nom', selon ta logique
+        produit.prix = request.POST.get('prix')
         produit.save()
+        return redirect('HomePageAdmin')  # Remplace par le nom exact de ta page d'accueil admin
 
-        return redirect('HomePageAdmin')  # Redirige vers la page d'accueil après modification
+    # Si jamais on appelle cette vue en GET, on redirige aussi
+    return redirect('HomePageAdmin')
 
-    return redirect('/accueil/HomePageAdmin.html')
+
+def add_produit(request):
+    if request.method == 'POST':
+        surface = request.POST.get('surface')
+        prix = request.POST.get('prix')
+        produit = Produit(surface=surface, prix=prix)
+        produit.save()
+        return redirect('accueil:HomePageAdmin')  # Redirige vers la page d'accueil admin après l'ajout
+    return render(request, 'accueil/HomePageAdmin.html')  # Affiche le formulaire d'ajout de produit
 
 def produit_supprimer(request, produit_id):
     produit = get_object_or_404(Produit, id=produit_id)
     produit.delete()
     return redirect('/accueil/HomePageAdmin.html')
-    
