@@ -7,3 +7,7 @@ from django.shortcuts import render
 def index(request):
     #articles = Article.objects.all()
     return render(request, 'accueil/index.html')
+
+
+def login(request):
+    return render(request, 'accueil/login.html')
