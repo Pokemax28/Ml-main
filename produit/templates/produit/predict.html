@@ -25,19 +25,6 @@
                 <div class="alert alert-success mt-4" role="alert">
                     Prix estimé : {{ result }} €
                 </div>
-                <script>
-                    fetch("{% url 'save_prediction' %}", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRFToken": "{{ csrf_token }}"
-                        },
-                        body: JSON.stringify({
-                            surface: {{ surface }},
-                            result: {{ result }}
-                        })
-                    });
-                </script>
             {% endif %}
         </div>
     </div>
