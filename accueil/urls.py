@@ -18,6 +18,9 @@ from django.urls import path
 from . import views
 from django.urls import include
 from django.conf import settings
+import produit.urls
+from django.conf.urls.static import static  
+
 
 urlpatterns = [
    path('', views.index, name='Login'),
@@ -28,6 +31,9 @@ urlpatterns = [
   path('produit_modifier/<int:produit_id>/', views.produit_modifier, name='produit_modifier'),
   path('produit_add_admin/', views.add_produit, name='produit_add_admin'),
   path('produit/', include('produit.urls')),
+path('logout/', views.logout_user, name='logout'),
+ path('produit/', include(('produit.urls', 'produit'), namespace='produit')),
+
 
 
 ]

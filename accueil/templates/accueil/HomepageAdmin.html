@@ -10,7 +10,17 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h1 class="text-center">Bienvenue sur la page d'accueil</h1>
+    <header class="bg-primary text-white py-4 mb-4">
+        <h1 class="text-center">Bienvenue sur la page d'accueil</h1>
+        <div class="d-flex justify-content-end container">
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger">Se déconnecter</button>
+            </form>
+            
+        </div>
+    </header>
+    
     
     <p class="text-center">Bonjour, {{ auth_user.username }}!</p>
 
@@ -20,7 +30,7 @@
             <thead>
                 <tr>
                     <th>Nom</th>
-                    <th>Description</th>
+                    <th>Surface</th>
                     <th>Prix</th>
                     <th>Actions</th>
                 </tr>

@@ -11,6 +11,14 @@ body {
     height: 100vh;
 }
 
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 0 0 12px 12px;
+}
+
 .login-container {
     background-color: white;
     padding: 40px;

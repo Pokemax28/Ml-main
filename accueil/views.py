@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from produit.models import Produit
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import logout
 
 #from .models import Article
 
@@ -83,3 +84,7 @@ def produit_supprimer(request, produit_id):
     produit = get_object_or_404(Produit, id=produit_id)
     produit.delete()
     return redirect('HomePageAdmin.html')
+
+def logout_user(request):
+    logout(request)
+    return redirect('Login')
